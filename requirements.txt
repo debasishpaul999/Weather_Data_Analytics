@@ -2,3 +2,5 @@ pandas
 seaborn
 matplotlib
 requests
+mysql-connector-python
+python-dotenv

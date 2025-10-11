@@ -1,18 +1,16 @@
 # processor.py
 import pandas as pd
 import os
+from database import insert_dataframe_to_db
 
-def process_and_save(data, folder, filename):
-    """Convert JSON weather data to CSV and save in the specified folder."""
+def process_to_database(data, city_name, country, year):
+    """Process API data directly to database without intermediate CSV."""
     if "daily" not in data:
         print("⚠️ No 'daily' data found in API response.")
         return
 
-    os.makedirs(folder, exist_ok=True)
-    daily_data = data["daily"]
-    df = pd.DataFrame(daily_data)
+    df = pd.DataFrame(data["daily"])
 
-    # Order columns (if they exist)
     cols = [
         "time",
         "temperature_2m_max",
@@ -25,6 +23,6 @@ def process_and_save(data, folder, filename):
     ]
     df = df[[c for c in cols if c in df.columns]]
 
-    path = os.path.join(folder, filename)
-    df.to_csv(path, index=False)
-    print(f"✅ Saved: {path}")
+    # Insert directly into database
+    insert_dataframe_to_db(df, city_name, country, year)
+    print(f"✅ Stored complete {year} data in database")
