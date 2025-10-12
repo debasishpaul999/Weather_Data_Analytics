@@ -179,6 +179,11 @@ class WeatherApp {
             
             if (data.success) {
                 this.displayResults(data);
+                
+                // NEW: If custom city was used, add it to the dropdown for future use
+                if (useCustomCity && customCity) {
+                    this.addCityToDropdown(customCity, data.summary.country || 'Custom');
+                }
             } else {
                 this.showError('Failed to load weather data: ' + data.error);
             }
@@ -186,6 +191,33 @@ class WeatherApp {
             this.showError('Network error: ' + error.message);
         } finally {
             this.hideLoading();
+        }
+    }
+
+    // NEW: Add custom city to dropdown after successful analysis
+    addCityToDropdown(cityName, country) {
+        const select = document.getElementById('citySelect');
+        
+        // Check if city already exists in dropdown
+        const existingOption = Array.from(select.options).find(opt => 
+            opt.value.toLowerCase() === cityName.toLowerCase()
+        );
+        
+        if (!existingOption) {
+            const option = document.createElement('option');
+            option.value = cityName;
+            option.textContent = `${cityName} (${country})`;
+            select.appendChild(option);
+            
+            // Sort the options alphabetically (keeping the "Choose a city..." option first)
+            const options = Array.from(select.options);
+            const firstOption = options.shift(); // Remove the first "Choose a city..." option
+            options.sort((a, b) => a.text.localeCompare(b.text));
+            select.innerHTML = '';
+            select.appendChild(firstOption);
+            options.forEach(opt => select.appendChild(opt));
+            
+            console.log(`✅ Added "${cityName}" to city dropdown`);
         }
     }
 
@@ -259,7 +291,7 @@ class WeatherApp {
         `;
     }
 
-    // NEW: Remove duplicate data entries
+    // Remove duplicate data entries
     removeDuplicateData(data) {
         const uniqueData = [];
         const seenDates = new Set();
@@ -309,7 +341,7 @@ class WeatherApp {
         this.createPaginationControls(uniqueData.length, totalPages);
     }
 
-    // NEW: Format date for better display
+    // Format date for better display
     formatDisplayDate(dateString) {
         try {
             const date = new Date(dateString);
