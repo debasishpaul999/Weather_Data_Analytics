@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Transform Weather Data into Actionable Intelligence</h1>
+            <p>Advanced analytics platform for historical weather pattern analysis, trend identification, and comprehensive climate intelligence.</p>
+            <div class="hero-buttons">
+                <a href="{{ url_for('analysis') }}" class="btn btn-primary">
+                    <span class="btn-icon">📊</span>
+                    Explore Data
+                </a>
+                <a href="{{ url_for('about') }}" class="btn btn-secondary">
+                    <span class="btn-icon">ℹ️</span>
+                    Learn More
+                </a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="weather-card">
+                <div class="card-header">
+                    <h3>Sample Analysis Overview</h3>
+                </div>
+                <div class="card-content">
+                    <div class="metric">
+                        <span class="value">28.5°C</span>
+                        <span class="label">Average Temperature</span>
+                    </div>
+                    <div class="metric">
+                        <span class="value">1250mm</span>
+                        <span class="label">Annual Rainfall</span>
+                    </div>
+                    <div class="metric">
+                        <span class="value">8.2h</span>
+                        <span class="label">Daily Sunshine</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="features-header">
+            <h2>Comprehensive Weather Analytics</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Interactive Visualizations</h3>
+                <p>Dynamic charts and graphs that provide real-time insights into temperature, rainfall, and climate patterns with fully customizable date ranges.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌡️</div>
+                <h3>Temperature Analysis</h3>
+                <p>Comprehensive tracking of maximum and minimum temperatures with advanced trend analysis and seasonal variation identification.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌧️</div>
+                <h3>Rainfall Intelligence</h3>
+                <p>Detailed precipitation analysis including monthly distributions, extreme weather events, and rainfall pattern recognition.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>Trend Analytics</h3>
+                <p>Advanced detection of long-term climate patterns and year-over-year comparisons for data-driven decision making.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="container">
+        <h2>Ready to Unlock Weather Insights?</h2>
+        <p>Start analyzing historical weather patterns for any location worldwide with our powerful interactive tools and comprehensive analytics platform.</p>
+        <a href="{{ url_for('analysis') }}" class="btn btn-primary">
+            <span class="btn-icon">🚀</span>
+            Launch Analysis Dashboard
+        </a>
+    </div>
+</section>
+{% endblock %}
