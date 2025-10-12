@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="analysis-controls">
+    <div class="container">
+        <div class="analysis-header">
+            <h1 class="fade-in-up">Advanced Weather Analytics</h1>
+            <p class="subtitle fade-in-up delay-1">Comprehensive historical weather analysis with interactive visualizations and detailed insights</p>
+        </div>
+        
+        <div class="control-panel slide-in-up">
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="citySelect" class="form-label">
+                        <span class="label-icon">📍</span>
+                        Select City
+                    </label>
+                    <select id="citySelect" class="form-control">
+                        <option value="">Choose a city...</option>
+                    </select>
+                </div>
+
+                <div class="custom-city-section" id="customCitySection" style="display: none;">
+                    <div class="form-group">
+                        <label for="customCity" class="form-label">
+                            <span class="label-icon">🏙️</span>
+                            Custom City Name
+                        </label>
+                        <input type="text" id="customCity" class="form-control" placeholder="Enter city name (e.g., London, Tokyo)">
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="useCustomCity" class="checkbox-input">
+                        <span class="checkmark"></span>
+                        Use custom city input
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="date-range-group">
+                    <div class="form-group">
+                        <label for="startDate" class="form-label">
+                            <span class="label-icon">📅</span>
+                            Start Date
+                        </label>
+                        <input type="date" id="startDate" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="endDate" class="form-label">
+                            <span class="label-icon">📅</span>
+                            End Date
+                        </label>
+                        <input type="date" id="endDate" class="form-control">
+                    </div>
+                </div>
+                
+                <div class="date-info">
+                    <span class="info-icon">ℹ️</span>
+                    <span>Select a date range to analyze comprehensive historical weather patterns and trends</span>
+                </div>
+
+                <button id="analyzeBtn" class="btn btn-primary btn-analyze pulse-on-hover">
+                    <span class="btn-icon">📊</span>
+                    Generate Comprehensive Analysis
+                </button>
+            </div>
+
+            <div class="form-section">
+                <div class="analysis-tips">
+                    <h4>📋 Analysis Guidelines</h4>
+                    <ul>
+                        <li>Select cities with available historical meteorological data</li>
+                        <li>Choose date ranges within the last 5 years for optimal accuracy</li>
+                        <li>Use specific city names for precise geographical results</li>
+                        <li>Larger date ranges provide more comprehensive trend analysis</li>
+                        <li>Data sourced from reliable global meteorological networks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="analysis-results" id="resultsSection" style="display: none;">
+    <div class="container">
+        <div class="results-header">
+            <h2 id="resultsTitle" class="fade-in-up">Weather Analysis Results</h2>
+            <div class="data-summary" id="dataSummary"></div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container scale-in">
+                <div class="chart-header">
+                    <h3>Temperature Trends Analysis</h3>
+                    <div class="chart-actions">
+                        <button class="chart-action-btn download-chart" data-chart="temperatureChart" title="Download Chart">
+                            <span>📥</span>
+                        </button>
+                    </div>
+                </div>
+                <canvas id="temperatureChart"></canvas>
+            </div>
+            
+            <div class="chart-container scale-in delay-1">
+                <div class="chart-header">
+                    <h3>Precipitation Analysis</h3>
+                    <div class="chart-actions">
+                        <button class="chart-action-btn download-chart" data-chart="rainfallChart" title="Download Chart">
+                            <span>📥</span>
+                        </button>
+                    </div>
+                </div>
+                <canvas id="rainfallChart"></canvas>
+            </div>
+            
+            <div class="chart-container scale-in delay-2">
+                <div class="chart-header">
+                    <h3>Seasonal Climate Patterns</h3>
+                    <div class="chart-actions">
+                        <button class="chart-action-btn download-chart" data-chart="seasonalChart" title="Download Chart">
+                            <span>📥</span>
+                        </button>
+                    </div>
+                </div>
+                <canvas id="seasonalChart"></canvas>
+            </div>
+            
+            <div class="chart-container scale-in delay-3">
+                <div class="chart-header">
+                    <h3>Extreme Weather Events</h3>
+                    <div class="chart-actions">
+                        <button class="chart-action-btn download-chart" data-chart="extremeChart" title="Download Chart">
+                            <span>📥</span>
+                        </button>
+                    </div>
+                </div>
+                <canvas id="extremeChart"></canvas>
+            </div>
+        </div>
+
+        <div class="data-table slide-in-up">
+            <div class="table-header">
+                <h3>Detailed Weather Data</h3>
+                <div class="table-actions">
+                    <button class="btn-secondary btn-sm" id="exportData">
+                        <span class="btn-icon">📋</span>
+                        Export Data
+                    </button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table id="weatherTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Max Temp (°C)</th>
+                            <th>Min Temp (°C)</th>
+                            <th>Rainfall (mm)</th>
+                            <th>Sunshine (hours)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="weatherTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="loading-section" id="loadingSection" style="display: none;">
+    <div class="container">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3 class="fade-in">Processing Weather Analysis</h3>
+            <p class="fade-in delay-1">Generating comprehensive meteorological insights and visualizations...</p>
+            <div class="loading-steps">
+                <div class="step active bounce-in">Fetching meteorological data</div>
+                <div class="step bounce-in delay-1">Processing climate information</div>
+                <div class="step bounce-in delay-2">Creating advanced visualizations</div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="about-hero">
+    <div class="container">
+        <h1>About WeatherInsight</h1>
+        <p>Discover the advanced technology and sophisticated methodology behind our comprehensive weather analytics platform.</p>
+    </div>
+</section>
+
+<section class="about-content">
+    <div class="container">
+        <div class="about-section">
+            <h2>Platform Overview</h2>
+            <p>WeatherInsight is an advanced meteorological data analysis platform that transforms raw weather data into actionable intelligence through sophisticated visualization and comprehensive analytics. Our platform empowers researchers, businesses, and weather enthusiasts with deep insights into climate patterns and trends.</p>
+        </div>
+
+        <div class="about-section">
+            <h2>Technology Architecture</h2>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <h3>Backend Infrastructure</h3>
+                    <ul>
+                        <li>Python with Flask framework</li>
+                        <li>MySQL for robust data storage</li>
+                        <li>RESTful API architecture</li>
+                        <li>Data caching and optimization</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <h3>Frontend Experience</h3>
+                    <ul>
+                        <li>Modern HTML5, CSS3, JavaScript</li>
+                        <li>Chart.js for advanced visualization</li>
+                        <li>Responsive design principles</li>
+                        <li>Progressive Web App features</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <h3>Data Processing Engine</h3>
+                    <ul>
+                        <li>Open-Meteo Historical Weather API</li>
+                        <li>Pandas for data manipulation</li>
+                        <li>Custom aggregation algorithms</li>
+                        <li>Real-time data validation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>Platform Capabilities</h2>
+            <div class="features-list">
+                <div class="feature-item">
+                    <h3>📊 Advanced Data Visualization</h3>
+                    <p>Interactive charts and graphs that dynamically update based on user selections, providing real-time insights into complex weather patterns and trends.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🌡️ Comprehensive Temperature Analytics</h3>
+                    <p>Advanced tracking of maximum and minimum temperatures with sophisticated trend analysis, seasonal pattern recognition, and anomaly detection.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🌧️ Detailed Precipitation Analysis</h3>
+                    <p>Comprehensive monitoring of precipitation patterns, identification of rainy seasons, and analysis of extreme weather events with statistical significance.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>📈 Historical Climate Comparison</h3>
+                    <p>Advanced comparison of weather patterns across different time periods with sophisticated algorithms for identifying long-term climate trends and variations.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>Data Sources & Methodology</h2>
+            <p>Our platform utilizes comprehensive historical weather data from reliable global sources including:</p>
+            <ul class="tech-item">
+                <li>Open-Meteo Historical Weather API integration</li>
+                <li>Global meteorological stations network</li>
+                <li>Quality-controlled historical records</li>
+                <li>Satellite and ground-based observations</li>
+            </ul>
+            <p style="margin-top: 1rem; color: var(--text-secondary);">All data undergoes rigorous quality assurance and validation processes to ensure accuracy and reliability for research and analysis purposes.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

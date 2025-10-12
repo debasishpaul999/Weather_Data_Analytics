@@ -1,2 +1,10 @@
-# folder or files to be ignored
-\weather_venv
+# .gitignore
+.env
+*.env
+__pycache__/
+*.pyc
+.DS_Store
+data/outputs/
+weather_venv/
+Data/
+weather_graphs/
